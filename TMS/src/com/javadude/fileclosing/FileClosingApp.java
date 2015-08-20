@@ -1,12 +1,12 @@
 package com.javadude.fileclosing;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class FileClosingApp {
 	// NOTE: THIS IS BAD (and will be bad for a while...)
 	public static void main(String[] args) {
+		Throwable pending = null;
 		FileWriter fw = null;
 		PrintWriter pw = null;
 		try {
@@ -15,30 +15,26 @@ public class FileClosingApp {
 			pw.println("Hello");
 			pw.println("Goodbye");
 			
-		} catch (IOException e) {
-			// DO SOMETHING MORE HERE IN REAL APPS...
-			e.printStackTrace();
+		} catch (Throwable t) {
+			pending = t;
 
 		} finally {
-			// EEEEEEK!!!
-			// EEEEEEK!!!
-			// IF EXCEPTION THROWN IN HERE, EXCEPTION FROM try BLOCK LOST!!!
-			// EEEEEEK!!!
-			// EEEEEEK!!!
 			if (pw != null)
 				try {
 					pw.close();
 				} catch (Throwable t) {
-					// DO SOMETHING MORE HERE IN REAL APPS...
-					t.printStackTrace();
+					if (pending == null)
+						pending = t;
 				}
 			if (fw != null)
 				try {
 					fw.close();
 				} catch (Throwable t) {
-					// DO SOMETHING MORE HERE IN REAL APPS...
-					t.printStackTrace();
+					if (pending == null)
+						pending = t;
 				}
+			if (pending != null)
+				throw new RuntimeException(pending);
 		}
 	}
 }

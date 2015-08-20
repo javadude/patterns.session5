@@ -32,5 +32,12 @@ public class App3 {
 		walker2.setInOrder(null);
 		walker2.setPostOrder((node) -> {System.out.println(node.getData());});
 		walker2.walk(root);
+		
+		System.out.println("In Order ('locking')");
+		System.out.println("========");
+		walker2.setPreOrder((node) -> {System.out.println("locking subtree");});
+		walker2.setInOrder((node) -> {System.out.println(node.getData());});
+		walker2.setPostOrder((node) -> {System.out.println("unlocking subtree");});
+		walker2.walk(root);
 	}
 }

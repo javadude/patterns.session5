@@ -21,7 +21,19 @@ public class FileClosingApp {
 
 		} finally {
 			if (pw != null)
-				pw.close();
+				try {
+					pw.close();
+				} catch (Throwable t) {
+					// DO SOMETHING MORE HERE IN REAL APPS...
+					t.printStackTrace();
+				}
+			if (fw != null)
+				try {
+					fw.close();
+				} catch (Throwable t) {
+					// DO SOMETHING MORE HERE IN REAL APPS...
+					t.printStackTrace();
+				}
 		}
 	}
 }

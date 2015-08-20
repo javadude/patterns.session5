@@ -20,6 +20,11 @@ public class FileClosingApp {
 			e.printStackTrace();
 
 		} finally {
+			// EEEEEEK!!!
+			// EEEEEEK!!!
+			// IF EXCEPTION THROWN IN HERE, EXCEPTION FROM try BLOCK LOST!!!
+			// EEEEEEK!!!
+			// EEEEEEK!!!
 			if (pw != null)
 				try {
 					pw.close();

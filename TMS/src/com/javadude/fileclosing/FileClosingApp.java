@@ -33,8 +33,13 @@ public class FileClosingApp {
 					if (pending == null)
 						pending = t;
 				}
-			if (pending != null)
+			if (pending != null) {
+				if (pending instanceof RuntimeException)
+					throw (RuntimeException) pending;
+				if (pending instanceof Error)
+					throw (Error) pending;
 				throw new RuntimeException(pending);
+			}
 		}
 	}
 }

@@ -25,13 +25,12 @@ public class BinaryTreeNode {
 	public int getData() {
 		return data;
 	}
-	public void inorder() {
-		if (left != null) {
-			left.inorder();
-		}
-		System.out.println(data);
-		if (right != null) {
-			right.inorder();
-		}
+
+	public BinaryTreeNode getLeft() {
+		return left;
+	}
+
+	public BinaryTreeNode getRight() {
+		return right;
 	}
 }

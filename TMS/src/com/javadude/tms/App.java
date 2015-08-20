@@ -11,6 +11,15 @@ public class App {
 		root.insert(93);
 		root.insert(4);
 		
-		root.inorder();
+		inorder(root);
+	}
+	private static void inorder(BinaryTreeNode node) {
+		if (node.getLeft() != null) {
+			inorder(node.getLeft());
+		}
+		System.out.println(node.getData());
+		if (node.getRight() != null) {
+			inorder(node.getRight());
+		}
 	}
 }

@@ -11,15 +11,30 @@ public class App {
 		root.insert(93);
 		root.insert(4);
 		
-		inorder(root);
+		System.out.println("In Order");
+		System.out.println("========");
+		printInorder(root);
+		System.out.println();
+		System.out.println("Sum: " + sumInorder(root));
 	}
-	private static void inorder(BinaryTreeNode node) {
+	private static void printInorder(BinaryTreeNode node) {
 		if (node.getLeft() != null) {
-			inorder(node.getLeft());
+			printInorder(node.getLeft());
 		}
 		System.out.println(node.getData());
 		if (node.getRight() != null) {
-			inorder(node.getRight());
+			printInorder(node.getRight());
 		}
+	}
+	private static int sumInorder(BinaryTreeNode node) {
+		int sum = 0;
+		if (node.getLeft() != null) {
+			sum += sumInorder(node.getLeft());
+		}
+		sum += node.getData();
+		if (node.getRight() != null) {
+			sum += sumInorder(node.getRight());
+		}
+		return sum;
 	}
 }
